@@ -1,6 +1,9 @@
 import constants
 import copy
 
+def stats(team, total_players, experienced, inexperienced, average_height, specific_players, guardians):
+    print(f'Team: {team} Stats\n--------------------\nTotal players: {total_players}\nTotal experienced: {experienced}\nTotal inexperienced: {inexperienced}\nAverage height: {average_height}\n\nPlayers on Team: {specific_players}\n\nGuardians: {guardians}')
+
 copied_players = copy.deepcopy(constants.PLAYERS)
 
 for player in copied_players:
@@ -11,7 +14,7 @@ for player in copied_players:
     else:
         player['experience'] = False
 
-panthers = [
+panther = [
 copied_players[0],
 copied_players[1],
 copied_players[2],
@@ -37,6 +40,8 @@ copied_players[15],
 copied_players[16],
 copied_players[17],
 ]
+
+teams = [panthers, bandits, warriors]
 
 print('BASKETBALL TEAM STATS TOOL\n\n----MENU----')
 while True:
