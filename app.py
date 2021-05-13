@@ -1,9 +1,6 @@
 import constants
 import copy
 
-print('BASKETBALL TEAM STATS TOOL\n\n----MENU----\n\nHere are your choices:\n 1) Display Team Stats\n 2) Quit')
-# input("\nEnter an option > ")
-
 copied_players = copy.deepcopy(constants.PLAYERS)
 
 for player in copied_players:
@@ -41,4 +38,35 @@ copied_players[16],
 copied_players[17],
 ]
 
-print(panthers)
+print('BASKETBALL TEAM STATS TOOL\n\n----MENU----')
+while True:
+    print('\nHere are your choices:\n 1) Display Team Stats\n 2) Quit')
+    try:
+        answer = input('\nEnter an option > ')
+        answer = int(answer)
+        if answer == 1:
+            print('1) Panthers\n2) Bandits\n3) Warriors')
+            while True:
+                try:
+                    answer = input('\nEnter an option > ')
+                    answer = int(answer)
+                    if answer == 1:
+                        print('yoo')
+                    elif answer == 2:
+                        print('yoo2')
+                    elif answer == 3:
+                        print('yoo3')
+                    else:
+                        print('\nPlease answer only 1, 2, or 3.')
+                        continue
+                except ValueError:
+                    print('\nPlease answer only 1, 2, or 3.')
+        elif answer == 2:
+            print('\nTOOL CLOSING')
+            exit()
+        else:
+            print('\nPlease answer only 1 or 2.')
+            continue
+    except ValueError:
+        print('\nPlease answer only 1 or 2.')
+        continue
