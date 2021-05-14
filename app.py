@@ -2,10 +2,10 @@ import constants
 import copy
 
 def stats(team_name, team_content):
-    total_players = len(team_name)
+    total_players = len(team_content)
     experienced = 0
     inexperienced = 0
-    average_height = 0
+    total_height = 0
     player_names_list = []
     guardians_list = []
 
@@ -20,9 +20,11 @@ def stats(team_name, team_content):
         else:
             inexperienced += 1
 
-        average_height += int(player['height'][0:2])
+        total_height += int(player['height'][0:2])
         player_names_list.append(player['name'])
         guardians_list.append(player['guardians'])
+
+    average_height = total_height / total_players
 
     for player in player_names_list:
         player_names_string = ', '.join(player_names_list)
@@ -42,7 +44,7 @@ def stats(team_name, team_content):
     Total players: {total_players}
     Total experienced: {experienced}
     Total inexperienced: {inexperienced}
-    Average height: {average_height}\n
+    Average height: {int(average_height)}\n
     Players on Team: {player_names_string}\n
     Guardians: {guardians_string}\n''')
 
@@ -102,15 +104,17 @@ while True:
                         break
                     elif answer == 2:
                         stats(constants.TEAMS[1], bandits)
+                        break
                     elif answer == 3:
                         stats(constants.TEAMS[2], warriors)
+                        break
                     else:
                         print('\nPlease answer only 1, 2, or 3.')
                         continue
                 except ValueError:
                     print('\nPlease answer only 1, 2, or 3.')
                     continue
-            break
+                break
         elif answer == 2:
             print('''
     ------------
@@ -123,3 +127,10 @@ while True:
     except ValueError:
         print('\nPlease answer only 1 or 2.\n')
         continue
+    while True:
+        answer = input('Press C to continue... ')
+        if answer.upper() == 'C':
+            break
+        else:
+            continue
+    continue
