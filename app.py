@@ -1,6 +1,20 @@
 import constants
 import copy
 
+def balance_teams(team):
+    true_count = 0
+    false_count = 0
+    while len(team) != 6:
+        for player in copied_players:
+            if true_count != 3 and player['experience'] == True:
+                team.append(player)
+                copied_players.remove(player)
+                true_count += 1
+            if false_count != 3 and player['experience'] == False:
+                team.append(player)
+                copied_players.remove(player)
+                false_count += 1
+
 def stats(team_name, team_content):
     total_players = len(team_content)
     experienced = 0
@@ -10,17 +24,12 @@ def stats(team_name, team_content):
     guardians_list = []
 
     for player in team_content:
-        if player['experience'] == 'YES':
-            player['experience'] = True
-        else:
-            player['experience'] = False
-
         if player['experience'] == True:
             experienced += 1
         else:
             inexperienced += 1
 
-        total_height += int(player['height'][0:2])
+        total_height += player['height']
         player_names_list.append(player['name'])
         guardians_list.append(player['guardians'])
 
@@ -44,47 +53,38 @@ def stats(team_name, team_content):
     Total players: {total_players}
     Total experienced: {experienced}
     Total inexperienced: {inexperienced}
-    Average height: {int(average_height)}\n
+    Average height: {int(average_height)} inches\n
     Players on Team: {player_names_string}\n
-    Guardians: {guardians_string}\n''')
+    Guardians: {guardians_string}''')
 
 copied_players = copy.deepcopy(constants.PLAYERS)
-copied_teams = copy.deepcopy(constants.TEAMS)
 
-panthers = [
-copied_players[0],
-copied_players[1],
-copied_players[2],
-copied_players[3],
-copied_players[4],
-copied_players[6],
-]
+player_height = 0
+true_count = 0
+false_count = 0
+panthers = []
+bandits = []
+warriors = []
 
-bandits = [
-copied_players[5],
-copied_players[7],
-copied_players[8],
-copied_players[9],
-copied_players[10],
-copied_players[11],
-]
+for player in copied_players:
+    if player['experience'] == 'YES':
+        player['experience'] = True
+    else:
+        player['experience'] = False
+    player_height = int(player['height'][0:2])
+    player['height'] = player_height
 
-warriors = [
-copied_players[12],
-copied_players[13],
-copied_players[14],
-copied_players[15],
-copied_players[16],
-copied_players[17],
-]
+balance_teams(panthers)
+balance_teams(bandits)
+balance_teams(warriors)
 
 print('''--------------------------
 BASKETBALL TEAM STATS TOOL
 --------------------------\n
-    ----MENU----\n''')
+    ----MENU----''')
 while True:
     print(
-'''Here are your choices:\n
+'''\nHere are your choices:\n
     1) Display Team Stats
     2) Quit''')
     try:
@@ -128,7 +128,7 @@ while True:
         print('\nPlease answer only 1 or 2.\n')
         continue
     while True:
-        answer = input('Press C to continue... ')
+        answer = input('\nPress C to continue... ')
         if answer.upper() == 'C':
             break
         else:
