@@ -1,10 +1,33 @@
 import constants
 import copy
 
-def stats(team, total_players, experienced, inexperienced, average_height, specific_players, guardians):
-    print(f'Team: {team} Stats\n--------------------\nTotal players: {total_players}\nTotal experienced: {experienced}\nTotal inexperienced: {inexperienced}\nAverage height: {average_height}\n\nPlayers on Team: {specific_players}\n\nGuardians: {guardians}')
+def stats(team, team2):
+    total_players = len(team2)
+    experienced = 1
+    inexperienced = 1
+    average_height = 2
+    player_names_list = []
+    guardians = 4
+
+    for player in team2:
+        player_names_list.append(player['name'])
+
+    for player in player_names_list:
+        player_names_string = ", ".join(player_names_list)
+
+    print(f'''
+    --------------------
+    Team: {team} Stats
+    --------------------\n
+    Total players: {total_players}
+    Total experienced: {experienced}
+    Total inexperienced: {inexperienced}
+    Average height: {average_height}\n
+    Players on Team: {player_names_string}\n
+    Guardians: {guardians}\n''')
 
 copied_players = copy.deepcopy(constants.PLAYERS)
+copied_teams = copy.deepcopy(constants.TEAMS)
 
 for player in copied_players:
     int(player['height'][0:2])
@@ -14,7 +37,7 @@ for player in copied_players:
     else:
         player['experience'] = False
 
-panther = [
+panthers = [
 copied_players[0],
 copied_players[1],
 copied_players[2],
@@ -43,20 +66,30 @@ copied_players[17],
 
 teams = [panthers, bandits, warriors]
 
-print('BASKETBALL TEAM STATS TOOL\n\n----MENU----')
+print('''--------------------------
+BASKETBALL TEAM STATS TOOL
+--------------------------\n
+    ----MENU----\n''')
 while True:
-    print('\nHere are your choices:\n 1) Display Team Stats\n 2) Quit')
+    print(
+'''Here are your choices:\n
+    1) Display Team Stats
+    2) Quit''')
     try:
         answer = input('\nEnter an option > ')
         answer = int(answer)
         if answer == 1:
-            print('1) Panthers\n2) Bandits\n3) Warriors')
+            print('''
+    1) Panthers
+    2) Bandits
+    3) Warriors''')
             while True:
                 try:
                     answer = input('\nEnter an option > ')
                     answer = int(answer)
                     if answer == 1:
-                        print('yoo')
+                        stats(constants.TEAMS[0], panthers)
+                        break
                     elif answer == 2:
                         print('yoo2')
                     elif answer == 3:
@@ -66,12 +99,17 @@ while True:
                         continue
                 except ValueError:
                     print('\nPlease answer only 1, 2, or 3.')
+                    continue
+            break
         elif answer == 2:
-            print('\nTOOL CLOSING')
+            print('''
+    ------------
+    TOOL CLOSING
+    ------------\n''')
             exit()
         else:
-            print('\nPlease answer only 1 or 2.')
+            print('\nPlease answer only 1 or 2.\n')
             continue
     except ValueError:
-        print('\nPlease answer only 1 or 2.')
+        print('\nPlease answer only 1 or 2.\n')
         continue
