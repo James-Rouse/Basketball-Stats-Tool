@@ -5,7 +5,8 @@ import copy
 def balance_teams(team):
     true_count = 0
     false_count = 0
-    while len(team) != 6:
+    num_players_team = len(constants.PLAYERS) / len(constants.TEAMS)
+    while len(team) != num_players_team:
         for player in copied_players:
             if true_count != 3 and player['experience'] == True:
                 team.append(player)
