@@ -1,6 +1,7 @@
 import constants
 import copy
 
+
 def balance_teams(team):
     true_count = 0
     false_count = 0
@@ -14,6 +15,7 @@ def balance_teams(team):
                 team.append(player)
                 copied_players.remove(player)
                 false_count += 1
+
 
 def stats(team_name, team_content):
     total_players = len(team_content)
@@ -57,80 +59,79 @@ def stats(team_name, team_content):
     Players on Team: {player_names_string}\n
     Guardians: {guardians_string}''')
 
-copied_players = copy.deepcopy(constants.PLAYERS)
 
-player_height = 0
-true_count = 0
-false_count = 0
-panthers = []
-bandits = []
-warriors = []
+if __name__ == "__main__":
+    copied_players = copy.deepcopy(constants.PLAYERS)
+    player_height = 0
+    panthers = []
+    bandits = []
+    warriors = []
 
-for player in copied_players:
-    if player['experience'] == 'YES':
-        player['experience'] = True
-    else:
-        player['experience'] = False
-    player_height = int(player['height'][0:2])
-    player['height'] = player_height
+    for player in copied_players:
+        if player['experience'] == 'YES':
+            player['experience'] = True
+        else:
+            player['experience'] = False
+        player_height = int(player['height'][0:2])
+        player['height'] = player_height
 
-balance_teams(panthers)
-balance_teams(bandits)
-balance_teams(warriors)
+    balance_teams(panthers)
+    balance_teams(bandits)
+    balance_teams(warriors)
 
-print('''--------------------------
-BASKETBALL TEAM STATS TOOL
---------------------------\n
-    ----MENU----''')
-while True:
-    print(
-'''\nHere are your choices:\n
-    1) Display Team Stats
-    2) Quit''')
-    try:
-        answer = input('\nEnter an option > ')
-        answer = int(answer)
-        if answer == 1:
-            print('''
-    1) Panthers
-    2) Bandits
-    3) Warriors''')
-            while True:
-                try:
-                    answer = input('\nEnter an option > ')
-                    answer = int(answer)
-                    if answer == 1:
-                        stats(constants.TEAMS[0], panthers)
-                        break
-                    elif answer == 2:
-                        stats(constants.TEAMS[1], bandits)
-                        break
-                    elif answer == 3:
-                        stats(constants.TEAMS[2], warriors)
-                        break
-                    else:
+    print('''--------------------------
+    BASKETBALL TEAM STATS TOOL
+    --------------------------\n
+        ----MENU----''')
+    while True:
+        print(
+    '''\nHere are your choices:\n
+        1) Display Team Stats
+        2) Quit''')
+        try:
+            answer = input('\nEnter an option > ')
+            answer = int(answer)
+            if answer == 1:
+                print('''
+        1) Panthers
+        2) Bandits
+        3) Warriors''')
+                while True:
+                    try:
+                        answer = input('\nEnter an option > ')
+                        answer = int(answer)
+                        if answer == 1:
+                            stats(constants.TEAMS[0], panthers)
+                            break
+                        elif answer == 2:
+                            stats(constants.TEAMS[1], bandits)
+                            break
+                        elif answer == 3:
+                            stats(constants.TEAMS[2], warriors)
+                            break
+                        else:
+                            print('\nPlease answer only 1, 2, or 3.')
+                            continue
+                    except ValueError:
                         print('\nPlease answer only 1, 2, or 3.')
                         continue
-                except ValueError:
-                    print('\nPlease answer only 1, 2, or 3.')
-                    continue
+                    break
+            elif answer == 2:
+                print('''
+        ------------
+        TOOL CLOSING
+        ------------\n''')
+                exit()
+            else:
+                print('\nPlease answer only 1 or 2.')
+                continue
+        except ValueError:
+            print('\nPlease answer only 1 or 2.')
+            continue
+        while True:
+            answer = input('\nPress C to continue... ')
+            if answer.upper() == 'C':
                 break
-        elif answer == 2:
-            print('''
-    ------------
-    TOOL CLOSING
-    ------------\n''')
-            exit()
-        else:
-            print('\nPlease answer only 1 or 2.\n')
-            continue
-    except ValueError:
-        print('\nPlease answer only 1 or 2.\n')
+            else:
+                continue
         continue
-    while True:
-        answer = input('\nPress C to continue... ')
-        if answer.upper() == 'C':
-            break
-        else:
-            continue
-    continue
